@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Grid</title>
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
+   
+  </head>
+  <body>
+
+    <div class="loginForm">
+        <div class="ltxt" >Login</div>
+        <input type="text" class="inputBox" placeholder="Email" id='inpEmail'>
+        <input type="password" class="inputBox" placeholder="password" id='inpPwd'>
+        <div class="loginBtn" onclick="login()">Login</div>
+    </div>
+
+
+    <script>
+
+        $(document).ready(function(){
+            if( localStorage.getItem('isLoggedIn') ==1 ){
+                location.href ='/image';
+            }
+        })
+
+        var validateEmail = (email) => {
+            var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(email);
+        }
+
+    
+        function login(){
+            var em = $('#inpEmail').val();
+            var pwd = $('#inpPwd').val();
+            if(!em){
+                alert('Please provide Email address');
+                return false;
+            }
+            if(em && !validateEmail(em)){
+                alert('Please provide valid Email address');
+                return false;
+            }
+            if(!pwd){
+                alert('Please provide password')
+                return false;
+            }
+            localStorage.setItem('isLoggedIn',1);
+            location.href ='/image';
+        }
+    </script>
+  </body>
+</html>
